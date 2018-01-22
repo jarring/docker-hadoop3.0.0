@@ -1,0 +1,13 @@
+FROM centos
+
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+RUN yum install -y net-tools java-1.8.0-openjdk-devel-debug-* openssh-server openssh-clients
+RUN yum clean all
+RUN systemctl enable sshd
+RUN cp -r /etc/ssh/ /etc/ssh-bak
+
+VOLUME ["/workspace"]
+EXPOSE 22
+
+CMD /usr/sbin/init

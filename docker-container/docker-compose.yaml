@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  master:
+    image: hadoop
+    hostname: master
+    privileged: true
+    ports:
+      - "2200:22"
+    networks:
+      net_docker:
+        ipv4_address: 172.100.100.100
+    links:
+     - slave1
+     - slave2
+     - slave3
+    volumes:
+       - $PWD/workspace/master/workspace:/workspace/
+       - $PWD/workspace/master/etc/ssh/:/etc/ssh/
+       - $PWD/workspace/master/user/ssh/:/home/hadoop/.ssh
+       - $PWD/workspace/common/:/common/
+    command: /common/entrypoint.sh
+  slave1:
+    image: hadoop
+    hostname: slave1
+    privileged: true
+    ports:
+      - "2201:22"
+    networks:
+      net_docker:
+        ipv4_address: 172.100.100.101
+    volumes:
+       - $PWD/workspace/slave1/workspace:/workspace/
+       - $PWD/workspace/slave1/etc/ssh/:/etc/ssh/
+       - $PWD/workspace/slave1/user/ssh/:/home/hadoop/.ssh
+       - $PWD/workspace/common/:/common/
+    command: /common/entrypoint.sh
+  slave2:
+    image: hadoop
+    hostname: slave2
+    privileged: true
+    ports:
+      - "2202:22"
+    networks:
+      net_docker:
+        ipv4_address: 172.100.100.102
+    volumes:
+       - $PWD/workspace/slave2/workspace:/workspace/
+       - $PWD/workspace/slave2/etc/ssh/:/etc/ssh/
+       - $PWD/workspace/slave2/user/ssh/:/home/hadoop/.ssh
+       - $PWD/workspace/common/:/common/
+    command: /common/entrypoint.sh
+  slave3:
+    image: hadoop
+    hostname: slave3
+    privileged: true
+    ports:
+      - "2203:22"
+    networks:
+      net_docker:
+        ipv4_address: 172.100.100.103
+    volumes:
+       - $PWD/workspace/slave3/workspace:/workspace/
+       - $PWD/workspace/slave3/etc/ssh/:/etc/ssh/
+       - $PWD/workspace/slave3/user/ssh/:/home/hadoop/.ssh
+       - $PWD/workspace/common/:/common/
+    command: /common/entrypoint.sh
+
+networks:
+  net_docker:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.100.100.0/24
