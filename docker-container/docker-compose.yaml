@@ -2,7 +2,8 @@ version: '3'
 
 services:
   master:
-    image: hadoop
+    # image: hadoop
+    build: ../docker-builder
     hostname: master
     privileged: true
     ports:
@@ -21,7 +22,8 @@ services:
        - $PWD/workspace/common/:/common/
     command: /common/entrypoint.sh
   slave1:
-    image: hadoop
+    # image: hadoop
+    build: ../docker-builder
     hostname: slave1
     privileged: true
     ports:
@@ -36,7 +38,8 @@ services:
        - $PWD/workspace/common/:/common/
     command: /common/entrypoint.sh
   slave2:
-    image: hadoop
+    # image: hadoop
+    build: ../docker-builder
     hostname: slave2
     privileged: true
     ports:
@@ -51,7 +54,8 @@ services:
        - $PWD/workspace/common/:/common/
     command: /common/entrypoint.sh
   slave3:
-    image: hadoop
+    # image: hadoop
+    build: ../docker-builder
     hostname: slave3
     privileged: true
     ports:
