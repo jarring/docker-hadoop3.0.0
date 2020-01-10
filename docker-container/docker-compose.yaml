@@ -20,7 +20,7 @@ services:
        - $PWD/workspace/master/etc/ssh/:/etc/ssh/
        - $PWD/workspace/master/user/ssh/:/home/hadoop/.ssh
        - $PWD/workspace/common/:/common/
-    command: /common/entrypoint.sh
+    command: sh /common/entrypoint.sh
   slave1:
     # image: hadoop
     build: ../docker-builder
@@ -36,7 +36,7 @@ services:
        - $PWD/workspace/slave1/etc/ssh/:/etc/ssh/
        - $PWD/workspace/slave1/user/ssh/:/home/hadoop/.ssh
        - $PWD/workspace/common/:/common/
-    command: /common/entrypoint.sh
+    command: sh /common/entrypoint.sh
   slave2:
     # image: hadoop
     build: ../docker-builder
@@ -52,7 +52,7 @@ services:
        - $PWD/workspace/slave2/etc/ssh/:/etc/ssh/
        - $PWD/workspace/slave2/user/ssh/:/home/hadoop/.ssh
        - $PWD/workspace/common/:/common/
-    command: /common/entrypoint.sh
+    command: sh /common/entrypoint.sh
   slave3:
     # image: hadoop
     build: ../docker-builder
@@ -68,7 +68,7 @@ services:
        - $PWD/workspace/slave3/etc/ssh/:/etc/ssh/
        - $PWD/workspace/slave3/user/ssh/:/home/hadoop/.ssh
        - $PWD/workspace/common/:/common/
-    command: /common/entrypoint.sh
+    command: sh /common/entrypoint.sh
 
 networks:
   net_docker:
