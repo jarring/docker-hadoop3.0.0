@@ -1,6 +1,7 @@
 #! /bin/bash
 
-user_dir="/home/hadoop"
+user_id="hadoop"
+user_dir="/home/$user_id"
 ssh_user_dir="$user_dir/.ssh"
 ssh_config="/etc/ssh"
 sshd_config="$ssh_config/sshd_config"
@@ -12,15 +13,15 @@ echo ssh_host_rsa_key=$ssh_host_rsa_key
 echo ssh_host_ecdsa_key=$ssh_host_ecdsa_key
 echo ssh_host_ed25519_key=$ssh_host_ed25519_key
 
-id hadoop >& /dev/null  
+id $user_id >& /dev/null  
 if [ $? -ne 0 ]  
 then  
-    useradd hadoop -d "$user_dir"
-    echo hadoop | passwd --stdin hadoop
-    echo "hadoop    ALL=(ALL)       ALL" >> /etc/sudoers
+    useradd $user_id -d "$user_dir"
+    echo $user_id | passwd --stdin $user_id
+    echo "$user_id    ALL=(ALL)       ALL" >> /etc/sudoers
 fi
 
-chown -R hadoop:hadoop "$user_dir"
+chown -R $user_id:$user_id "$user_dir"
 chmod 755 "$ssh_user_dir"
 
 if [ ! -f "$sshd_config" ]; then
